@@ -2,10 +2,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
 import postRoutes from './routes/posts.js';
 
 const app = express();
+dotenv.config();
 
 
 
@@ -15,7 +17,7 @@ app.use(cors());
 
 app.use('/posts', postRoutes);
 
-const CONNECTION_URL = 'mongodb+srv://java_master:java_master123@cluster0.dtg3u5g.mongodb.net/';
+// const CONNECTION_URL = 'mongodb+srv://java_master:java_master123@cluster0.dtg3u5g.mongodb.net/';
 const PORT = process.env.PORT || 5000
 
 // mongoose.connect(CONNECTION_URL, {useNewURLParser: true, useUnifiedTopology:true })
@@ -23,4 +25,6 @@ const PORT = process.env.PORT || 5000
 //     .catch((error) => console.log(error.message));
 
 // mongoose.set('useFindAndModify', false);
-mongoose.connect(CONNECTION_URL).then(()=> app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+mongoose.connect(process.env.CONNECTION_URL)
+    .then(()=> app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+    .catch((error) => console.log(error.message));
