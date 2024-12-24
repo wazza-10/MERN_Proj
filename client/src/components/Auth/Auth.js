@@ -7,6 +7,7 @@ import Input from './Input';
 import Icon from './icon';
 import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const Auth = () => {
@@ -14,6 +15,11 @@ const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+
+
+
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword );
     const handleSubmit = () => {
     };
@@ -41,12 +47,12 @@ const Auth = () => {
         // Construct the desired response object
         const mod_result = {
           accessToken: credential, // JWT token serves as accessToken
-          googleId: decoded.sub, // Google user ID
           profileObj: {
             email: decoded.email,
             name: decoded.name,
             givenName: decoded.given_name,
             familyName: decoded.family_name,
+            googleId: decoded.sub,
             imageUrl: decoded.picture, // Profile picture URL
           },
           tokenId: credential, // Same as accessToken in this case
@@ -61,7 +67,9 @@ const Auth = () => {
         const result = mod_result?.profileObj;
         const token =mod_result?.tokenId;
         dispatch({type:'AUTH', data: { result, token}});
-        
+
+
+        navigate('/');
       } catch (error) {
         console.error("Error processing Google login response:", error);
       }
