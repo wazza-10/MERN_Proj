@@ -1,7 +1,15 @@
 import axios from 'axios';
 
 
-const API = axios.create( {baseURL: 'http://localhost:5000' } )
+const API = axios.create( {baseURL: 'http://localhost:5000' } );
+
+API.interceptors.request.use((req) => {
+    if (localStorage.getItem('profile')) {
+        req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+        } 
+    
+        return req;
+});
 
 // const url = 'https://memories-project1-e786e7826044.herokuapp.com/posts';
 
