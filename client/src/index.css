@@ -1,6 +1,6 @@
 body {
      background-color: #0fd7bc6a;
-    background-image: url("E:\\Github_Projects\\MERN_Proj\\client\\src\\Img\\pexels-pixabay-531880.jpg");
+    background-image: url('/opt/build/repo/client/src/Img/pexels-pixabay-531880.jpg');
     background-attachment: fixed;
     background-size: cover; 
 
