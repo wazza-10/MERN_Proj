@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const API = axios.create( {baseURL: 'http://localhost:5000' } );
+const API = axios.create( {baseURL: 'https://insta-memories-app-23d210188f5b.herokuapp.com/posts' } );
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('profile')) {
